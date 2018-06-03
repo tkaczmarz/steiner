@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace Steiner
 {
-    public class Point
+    public class Point : IComparable
     {
         public double x;
         public double y;
-        public double Value { get { return x + y; } }
+
+        private double Value { get { return x + y; } }
 
         public Point(double x, double y)
         {
@@ -43,7 +44,7 @@ namespace Steiner
         {
             double minX = x < q.x ? x : q.x;
             double minY = y < q.y ? y : q.y;
-
+            Console.WriteLine("Merge of " + this + " and " + q + " == " + "(" + minX + ", " + minY + ")");
             return new Point(minX, minY);
         }
 
@@ -55,6 +56,20 @@ namespace Steiner
         public override string ToString()
         {
             return "(" + x + ", " + y + ")";
+        }
+
+        public int CompareTo(object obj)
+        {
+            Point p = obj as Point;
+            if (p != null)
+            {
+                if (LessThan(p))
+                    return -1;
+                else
+                    return 1;
+            }
+            else
+                throw new Exception("Object is not a point!");
         }
     }
 }
