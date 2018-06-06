@@ -44,7 +44,7 @@ namespace Steiner
         {
             double minX = x < q.x ? x : q.x;
             double minY = y < q.y ? y : q.y;
-            Console.WriteLine("Merge of " + this + " and " + q + " == " + "(" + minX + ", " + minY + ")");
+            
             return new Point(minX, minY);
         }
 
