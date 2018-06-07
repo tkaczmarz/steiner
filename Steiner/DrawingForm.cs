@@ -30,7 +30,20 @@ namespace Steiner
                 PointF A = GetPoint(line.A.X, line.A.Y);
                 PointF B = GetPoint(line.B.X, line.B.Y);
 
-                g.DrawLine(linePen, A, B);
+                if (A.X != B.X && A.Y != B.Y)
+                {
+                    PointF p;
+                    if (A.Y < B.Y)
+                        p = new PointF(A.X, B.Y);
+                    else
+                        p = new PointF(B.X, A.Y);
+
+                    g.DrawLine(linePen, A, p);
+                    g.DrawLine(linePen, B, p);
+                }
+                else
+                    g.DrawLine(linePen, A, B);
+
                 DrawPoint(new PointF(A.X - 2, A.Y - 2), g, red);
                 DrawPoint(new PointF(B.X - 2, B.Y - 2), g, red);
             }
